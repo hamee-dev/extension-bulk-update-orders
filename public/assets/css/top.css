@@ -1,0 +1,151 @@
+/* TOP画面用スタイル */
+#footer {
+    /* TOP画面は非表示 */
+    display: none;
+}
+
+#setting-list {
+    margin-top: 30px;
+}
+
+#setting-list-title h2 span {
+    margin-right: 10px;
+}
+
+#setting-list-title {
+    float: left;
+}
+
+#setting-list-count {
+    float: right;
+    margin-top: 30px;
+}
+
+#setting-list-table {
+    width: 100%;
+}
+
+#setting-list-table th {
+    background-color: #6778A0;
+    color: #ffffff;
+}
+
+#setting-list-table th, .setting-name, .setting-detail, .setting-date {
+    padding: 10px;
+}
+
+.inline div, .inline span{
+    display: table-cell;
+}
+
+.setting-name div {
+    font-size: 150%;
+}
+
+.setting-name .glyphicon {
+    margin-left: 5px;
+}
+
+.setting-detail .inline{
+    margin-bottom: 10px;
+}
+
+.setting-detail .inline span{
+    margin: 0 10px 0 10px;
+}
+
+.setting-detail-name div {
+    border: 1px solid #000000;
+    background-color: #ffffff;
+    min-width: 120px;
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+}
+
+.setting-detail-name span {
+    padding: 0 10px 0 10px;
+}
+
+.blue-icon {
+    color: #0099ff;
+}
+
+.orange-area {
+    background-color: #ee9800;
+}
+
+.setting-detail-message {
+    float: left;
+}
+
+.setting-detail-button {
+    text-align: right;
+}
+
+.setting-detail-button a {
+    margin-left: 20px;
+}
+
+.setting-bottom {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+}
+
+#execute-button a {
+    margin-right: 20px;
+}
+
+.update-value .setting-detail-icon {
+    vertical-align: top;
+    display: block;
+}
+
+.update-value-calc .font_bold{
+    padding-left: 10px;
+}
+
+.setting-detail-icon {
+    width: 120px;
+}
+
+.calc-value {
+    padding-left: 10px;
+}
+
+.tag-list span {
+    border: 1px solid #000000;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+    color: #000000;
+    font-weight: normal;
+    display: inline-block;
+    margin: 0 5px 5px 0 !important;
+    background-color: #ffffff;
+}
+
+#setting-list-table tr:nth-child(even){
+    background:#f2f2f2;
+}
+
+.setting-data td {
+    position: relative;
+}
+
+.setting-date {
+    position: absolute;
+    bottom: 0;
+}
+
+.setting-name {
+    width: 300px;
+    padding-bottom: 100px;
+    word-break: break-all;
+}
+
+.setting-detail {
+    padding-bottom: 40px;
+    word-break: break-all;
+}

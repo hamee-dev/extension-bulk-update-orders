@@ -1,0 +1,24 @@
+/* タスク一覧画面用スタイル */
+#tasklist-table {
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+#tasklist-table th {
+    background-color: #6778A0;
+    color: #ffffff;
+}
+
+#tasklist-table th, #tasklist-table td {
+    padding: 10px;
+}
+
+#message_title {
+    font-weight: bold;
+    margin-top: 0px;
+    text-align: center;
+}
+
+.message_contents {
+    text-align: center;
+}

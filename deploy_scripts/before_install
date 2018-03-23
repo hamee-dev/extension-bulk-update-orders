@@ -1,0 +1,82 @@
+#!/bin/bash
+set -e
+echo "start: before install"
+trap 'echo "finish: before install"' EXIT
+
+ID=$(curl 169.254.169.254/latest/meta-data/instance-id -s)
+ROLE=$(aws ec2 describe-instances \
+        --region ap-northeast-1 \
+        --instance-id $ID \
+        --query 'Reservations[].Instances[].Tags[?Key==`SubService`].Value' \
+        --output text)
+
+web() {
+  echo "role: web"
+  # CodeDeployの仕組みによりルーティングは発生しない状況での実施となる
+
+  if service nginx status; then
+    echo "stopping nginx"
+    echo "exec service nginx stop"
+    service nginx stop
+  else
+    echo "skip stop nginx"
+  fi
+
+  if service php-fpm status; then
+    echo "stopping php-fpm"
+    echo "exec service php-fpm stop"
+    service php-fpm stop
+  else
+    echo "skip stop php-fpm"
+  fi
+}
+
+batch() {
+  echo "role: batch"
+
+  # 旧crontabの退避
+  if [ -e "/etc/cron.d/ext-buo" ]; then
+    d=$(date +"%s")
+    echo "saving old cron"
+    echo "exec mv /etc/cron.d/ext-buo /tmp/ext-buo-$d"
+    mv /etc/cron.d/ext-buo /tmp/ext-buo-$d
+  else
+    echo "skip save old cron"
+  fi
+
+  sv_status=$(initctl status supervisord)
+  echo $sv_status
+
+  # supervisor管理対象のプロセス終了を同期的に待つ
+  if [[ "$sv_status" =~ "start/running" ]]; then
+    echo "stopping supervisor jobs"
+    echo "exec /usr/local/bin/supervisorctl stop all"
+    /usr/local/bin/supervisorctl stop all
+  else
+    echo "skip stop supervisor job"
+  fi
+
+  # supervisorのプロセスを停止
+  # supervisorctl updateで起動させても問題ないがプロセス再起動とする
+  if [[ "$sv_status" =~ "start/running" ]]; then
+    echo "stopping supervisord"
+    echo "exec initctl stop supervisord"
+    initctl stop supervisord
+  else
+    echo "skip stop supervisord"
+  fi
+}
+
+case "$ROLE" in
+  "web" )
+    web
+    ;;
+  "batch" )
+    batch
+    ;;
+  * )
+    echo "unmatch"
+    exit 1
+    ;;
+esac
+exit 0

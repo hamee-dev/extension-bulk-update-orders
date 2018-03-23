@@ -1,0 +1,1 @@
+<?= $this->fast_render('updatesetting/_common');

@@ -1,0 +1,92 @@
+companies:
+  -
+    id: '##DUMMY_COMPANY_ID1##'
+    main_function_id: 'dummy_main_function_id'
+    company_ne_id: 'dummy_company_ne_id'
+    name: 'ダミー企業'
+    name_kana: 'だみーきぎょう'
+    stoped_at:
+  -
+    id: '##DUMMY_COMPANY_ID2##'
+    main_function_id: 'dummy_main_function_id2'
+    company_ne_id: 'dummy_company_ne_id2'
+    name: 'ダミー企業2'
+    name_kana: 'だみーきぎょう2'
+    stoped_at:
+users:
+  -
+    id: '##DUMMY_USER_ID1##'
+    company_id: '##DUMMY_COMPANY_ID1##'
+    uid: 'dummy_uid'
+    pic_id: 2
+    pic_ne_id: 'dummy_pic_ne_id'
+    pic_name: 'ダミーユーザー'
+    pic_kana: 'だみーゆーざー'
+    access_token: 'dummy_access_token'
+    access_token_end_date: '2018-04-27 11:21:00'
+    refresh_token: 'dummy_refresh_token'
+    refresh_token_end_date: '018-04-29 11:21:00'
+  -
+    id: '##DUMMY_USER_ID2##'
+    company_id: '##DUMMY_COMPANY_ID1##'
+    uid: 'dummy_uid2'
+    pic_id: 2
+    pic_ne_id: 'dummy_pic_ne_id2'
+    pic_name: 'ダミーユーザー2'
+    pic_kana: 'だみーゆーざー2'
+    access_token: 'dummy_access_token2'
+    access_token_end_date: '2018-04-27 11:21:00'
+    refresh_token: 'dummy_refresh_token2'
+    refresh_token_end_date: '018-04-29 11:21:00'
+bulk_update_settings:
+  -
+    id: '##DUMMY_BULK_UPDATE_SETTING_ID1##'
+    company_id: '##DUMMY_COMPANY_ID1##'
+    name: '設定名'
+    temporary: 0
+    created_user_id: '##DUMMY_USER_ID1##'
+    last_updated_user_id: '##DUMMY_USER_ID1##'
+  -
+    id: '##DUMMY_BULK_UPDATE_SETTING_ID2##'
+    company_id: '##DUMMY_COMPANY_ID1##'
+    name: 'TEST2'
+    temporary: 0
+    created_user_id: '##DUMMY_USER_ID1##'
+    last_updated_user_id: '##DUMMY_USER_ID1##'
+  -
+    id: '##DUMMY_BULK_UPDATE_SETTING_ID3##'
+    company_id: '##DUMMY_COMPANY_ID1##'
+    name: 'TEST3'
+    temporary: 0
+    created_user_id: '##DUMMY_USER_ID1##'
+    last_updated_user_id: '##DUMMY_USER_ID1##'
+bulk_update_columns:
+  -
+    bulk_update_setting_id: '##DUMMY_BULK_UPDATE_SETTING_ID1##'
+    receive_order_column_id: 1
+    update_method_id: 1
+    update_value: 'TEST_VALUE1'
+  -
+    bulk_update_setting_id: '##DUMMY_BULK_UPDATE_SETTING_ID1##'
+    receive_order_column_id: 2
+    update_method_id: 1
+    update_value: 'TEST_VALUE2'
+  -
+    bulk_update_setting_id: '##DUMMY_BULK_UPDATE_SETTING_ID2##'
+    receive_order_column_id: 1
+    update_method_id: 2
+    update_value: 'TEST_VALUE1'
+  -
+    bulk_update_setting_id: '##DUMMY_BULK_UPDATE_SETTING_ID2##'
+    receive_order_column_id: 2
+    update_method_id: 2
+    update_value: 'TEST_VALUE2'
+  -
+    bulk_update_setting_id: '##DUMMY_BULK_UPDATE_SETTING_ID3##'
+    receive_order_column_id: 6
+    update_method_id: 1
+    update_value: '[tag]'
+# テストケース毎にexcluded_receive_ordersのレコードを初期化したいので空定義しておく
+excluded_receive_orders:
+# テストケース毎にrequest_keysのレコードを初期化したいので空定義しておく
+request_keys:

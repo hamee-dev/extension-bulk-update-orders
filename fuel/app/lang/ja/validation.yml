@@ -1,0 +1,30 @@
+# バリデーションエラーの文言の定義
+
+required: ':label は必須入力です。'
+min_length: ':label は:param:1文字以上で入力して下さい。'
+max_length: ':label は:param:1文字以下で入力して下さい。'
+match_pattern: ':label :param:2'
+valid_email: ':label はメールアドレスの形式で入力して下さい。'
+valid_string: ':label は:param:2で入力してください。'
+match_collection: ':label は正しい値を選択してください。'
+numeric_between: ':label は :param:1 から :param:2 の間で入力してください。'
+delivery: ':label を設定する場合は :param:1 の設定は必須入力です。'
+master: ':label は正しい値を選択してください。'
+seal: 'シールは同じ値を選択できません。'
+
+# オリジナルバリデーションのエラー文言
+add_text: ':label は追加する文字を入力してください。'
+zero_division: ':label に対して0で除算する設定はできません。別の更新値または更新方法を指定してください。'
+tag_format: ':label は「[ ]」で囲まれたタグ形式で入力してください。'
+tag_length: ':label の1つのタグ名は:param:1文字以下で入力して下さい。'
+tag_match_pattern: ":label のタグ名に「'」「\"」「 < 」「[」「]」を使用することはできません。"
+valid_date: ':label は「西暦/月/日」の形式で入力してください。'
+setting_name: ':label が重複しています。別の名前をつけてください。'
+setting_count: ':label が設定(保存)可能数:param:1件を超えています。登録済みの設定を削除して再度お試しください。保存せずに実行する場合は「実行」ボタンを押してください。'
+setting_column_count: ':label が登録上限を超えています。登録数を減らして再度お試しください。'
+forwarding_agent: '発送関連情報には発送方法が必須です。'
+payment: ':label は支払方法と同時に選択はできません。'
+payment_method: ':label は入金状況、承認状況と同時に選択はできません。'
+order_amount: ':label は総合計と同時に選択はできません。'
+total_amount: ':label は商品計、税金、手数料、発送代、他費用、ポイント数と同時に選択はできません。'
+only_number: ':label は正負の小数・整数のみを入力してください。'

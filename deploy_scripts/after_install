@@ -1,0 +1,63 @@
+#!/bin/bash
+set -e
+echo "start: after install"
+trap 'echo "finish: after install"' EXIT
+
+ID=$(curl 169.254.169.254/latest/meta-data/instance-id -s)
+ROLE=$(aws ec2 describe-instances \
+        --region ap-northeast-1 \
+        --instance-id $ID \
+        --query 'Reservations[].Instances[].Tags[?Key==`SubService`].Value' \
+        --output text)
+
+web() {
+  echo "role: web"
+}
+
+batch() {
+  echo "role: batch"
+}
+
+common() {
+  cd /usr/local/share/fuelphp/ext-buo
+
+  echo "exec chown ec2-user:ec2-user /usr/local/share/fuelphp/ext-buo/"
+  chown ec2-user:ec2-user /usr/local/share/fuelphp/ext-buo/
+
+  echo "exec sudo -u ec2-user php composer.phar update --no-dev"
+  sudo -u ec2-user php composer.phar update --no-dev
+
+  echo "exec chmod 777 /usr/local/share/fuelphp/ext-buo/fuel/app/cache/"
+  chmod 777 /usr/local/share/fuelphp/ext-buo/fuel/app/cache/
+
+  echo "exec chmod 777 /usr/local/share/fuelphp/ext-buo/fuel/app/cache/app"
+  chmod 777 /usr/local/share/fuelphp/ext-buo/fuel/app/cache/app
+
+  echo "exec chmod 777 /usr/local/share/fuelphp/ext-buo/fuel/app/cache/test"
+  chmod 777 /usr/local/share/fuelphp/ext-buo/fuel/app/cache/test
+
+  echo "exec chmod 777 /usr/local/share/fuelphp/ext-buo/fuel/app/config/"
+  chmod 777 /usr/local/share/fuelphp/ext-buo/fuel/app/config/
+
+  echo "exec chmod 777 /usr/local/share/fuelphp/ext-buo/fuel/app/logs/"
+  chmod 777 /usr/local/share/fuelphp/ext-buo/fuel/app/logs/
+
+  echo "exec chmod 777 /usr/local/share/fuelphp/ext-buo/fuel/app/tmp/"
+  chmod 777 /usr/local/share/fuelphp/ext-buo/fuel/app/tmp/
+}
+
+common
+
+case "$ROLE" in
+  "web" )
+    web
+    ;;
+  "batch" )
+    batch
+    ;;
+  * )
+    echo "unmatch"
+    exit 1
+    ;;
+esac
+exit 0

@@ -1,0 +1,21 @@
+bulk_update_settings:
+  -
+    id: '##DUMMY_BULK_UPDATE_SETTING_ID1##'
+    company_id: '##DUMMY_COMPANY_ID1##'
+    name: 'TEST1'
+    temporary: 0
+    allow_update_shipment_confirmed: 0
+    allow_update_yahoo_cancel: 0
+    allow_optimistic_lock_update_retry: 0
+    allow_reflect_order_amount: 0
+    created_user_id: '##DUMMY_USER_ID1##'
+    last_updated_user_id: '##DUMMY_USER_ID1##'
+    created_at: '2018-06-01 10:00:00'
+    updated_at: '2018-06-01 10:00:00'
+bulk_update_columns:
+  -
+    id: '##DUMMY_BULK_UPDATE_COLUMN_ID1##'
+    bulk_update_setting_id: '##DUMMY_BULK_UPDATE_SETTING_ID1##'
+    receive_order_column_id: 5
+    update_method_id: 2
+    update_value: 'TEST_VALUE1'

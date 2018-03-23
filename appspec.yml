@@ -1,0 +1,23 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /usr/local/share/fuelphp/ext-buo/
+permissions:
+  - object: /usr/local/share/fuelphp/ext-buo/
+    pattern: "**"
+    owner: ec2-user
+    group: ec2-user
+hooks:
+  BeforeInstall:
+    - location: deploy_scripts/before_install
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: deploy_scripts/after_install
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: deploy_scripts/application_start
+      timeout: 300
+      runas: root

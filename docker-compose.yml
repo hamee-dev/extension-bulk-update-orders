@@ -1,0 +1,25 @@
+version: '2'
+services:
+  db:
+    image: mysql:5.7
+    command: mysqld --character-set-server=utf8
+    ports:
+      - 13306:3306
+    environment:
+      - MYSQL_DATABASE=ext_buo
+      - MYSQL_ROOT_PASSWORD=ext_buo
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./docker/amazonlinux/init_sql/:/docker-entrypoint-initdb.d/
+  web:
+    build: docker/amazonlinux
+    volumes:
+      - ./:/var/www/html/
+    ports:
+      - 10080:80
+      - 10443:443
+    links:
+      - db
+    extra_hosts:
+      - "api-local.next-engine.org:172.19.0.1"
+      - "base-local.next-engine.org:172.19.0.1"

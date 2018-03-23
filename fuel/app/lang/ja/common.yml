@@ -1,0 +1,17 @@
+# 画面に限らず共通で使用される文言の定義
+
+created_at: '作成日時'
+created_user: '作成者'
+updated_at: '最終更新日時'
+last_updated_user: '最終更新者'
+
+button:
+  delete: '削除'
+  copy: '複製'
+  execute: '実行'
+  back: '戻る'
+  edit: '編集'
+
+other_tag_count: '他:number個'
+empty_update: '空欄にする'
+empty_update_dom: '<div class="setting-detail-icon black-area">空欄にする</div>'

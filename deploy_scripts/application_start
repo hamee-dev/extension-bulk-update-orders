@@ -1,0 +1,62 @@
+#!/bin/bash
+set -e
+echo "start: application start"
+trap 'echo "finish: application start"' EXIT
+
+ID=$(curl 169.254.169.254/latest/meta-data/instance-id -s)
+ROLE=$(aws ec2 describe-instances \
+        --region ap-northeast-1 \
+        --instance-id $ID \
+        --query 'Reservations[].Instances[].Tags[?Key==`SubService`].Value' \
+        --output text)
+CRON_TEMPLATE=/usr/local/share/fuelphp/ext-buo/fuel/app/config/crontab
+CRON_FILE=/etc/cron.d/ext-buo
+
+export PATH_TO_ENVFILE=/etc/sysconfig/ext-buo
+export EXEC_USER=ec2-user
+
+create_crontab() {
+  echo "create crontab"
+  echo "exec envsubst '${PATH_TO_ENVFILE} ${EXEC_USER}' < $CRON_TEMPLATE > $CRON_FILE"
+  envsubst '${PATH_TO_ENVFILE} ${EXEC_USER}' \
+      < $CRON_TEMPLATE \
+      > $CRON_FILE
+}
+
+web() {
+  echo "role: web"
+
+  echo "starting php-fpm"
+  echo "exec service php-fpm start"
+  service php-fpm start
+
+  echo "starting nginx"
+  echo "exec service nginx start"
+  service nginx start
+}
+
+batch() {
+  echo "role: batch"
+
+  echo "create envfile"
+  echo "exec: /opt/ext-buo/bin/get-secret-from-secretmanager.sh"
+  /opt/ext-buo/bin/get-secret-from-secretmanager.sh
+
+  echo "starting supervisord"
+  echo "exec initctl start supervisord"
+  initctl start supervisord
+  create_crontab
+}
+
+case "$ROLE" in
+  "web" )
+    web
+    ;;
+  "batch" )
+    batch
+    ;;
+  * )
+    echo "unmatch"
+    exit 1
+    ;;
+esac

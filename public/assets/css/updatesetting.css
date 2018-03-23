@@ -1,0 +1,193 @@
+#footer {
+    display: inline;
+}
+
+#setting-list-table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#setting-list-table th {
+    background-color: #6778a0;
+    color: #ffffff;
+}
+
+#setting-list-table th, #setting-list-table td{
+    padding: 10px;
+}
+
+.setting-list-button {
+    width: 10%;
+    text-align: right;
+    border-left-style: hidden !important;
+}
+
+.setting-list-data {
+    vertical-align: middle;
+}
+
+.add p {
+    display: table-cell;
+}
+
+.setting-list-data .text {
+    width: 200px;
+}
+
+.setting-list-data .caution {
+    margin-top: 10px;
+}
+
+.inline div, .inline span{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.setting-list-select {
+    width: 200px;
+}
+
+textarea {
+    margin-top: 10px;
+}
+
+.form-group {
+    vertical-align: top;
+}
+
+#setting-option {
+    margin: 0 auto;
+    padding: 40px 50px 50px 40px;
+}
+
+#setting-option-list {
+    text-align: left;
+}
+
+#setting-option-button{
+    border: 1px solid #e6e6e6;
+    font-size: 120%;
+    padding: 10px;
+    color: #0099ff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#setting-option-list {
+    border-right: 1px solid #e6e6e6;
+    border-left: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    padding-top: 20px;
+    background-color: #fcfcfc;
+    list-style:none;
+}
+
+#setting-option-list li {
+    margin-bottom: 20px;
+}
+
+#setting-option-button .glyphicon {
+    margin: 0 5px 0 5px;
+}
+
+#setting-option-list input {
+    margin-right: 5px;
+}
+
+#setting-option-list .glyphicon-question-sign {
+    margin-left: 5px;
+}
+
+.glyphicon-question-sign {
+    color: #0099ff;
+}
+
+.select-update select {
+    width: 150px;
+}
+
+#setting-info {
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px 30px 20px 30px;
+}
+
+#setting-info-name {
+    margin-top: 0px;
+}
+
+#setting-info-name div {
+    display: table-cell;
+    min-width: 90px;
+}
+
+#setting-info-date div{
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#setting-info-date div span{
+    display: block;
+}
+
+.tag-list {
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 2px 2px #999999;
+    position: absolute;
+    max-width: 100%;
+    z-index: 1000;
+    margin-bottom: 80px;
+}
+
+.tag-list .tag_icon {
+    display: inline-block;
+    border-radius: 5px;
+    margin: 3px;
+    padding: 3px;
+}
+
+.tag_icon {
+    word-break: break-all;
+    text-decoration: none;
+    white-space: normal;
+}
+
+.tag .setting-list-data {
+    position: relative;
+}
+
+.forwarding-agent-list div {
+    display: inline-block;
+    margin: 10px 10px 0 0;
+}
+
+.forwarding-agent-list select {
+    width: 180px;
+}
+
+.select_column {
+    width: 200px;
+}
+
+.text-area {
+    resize: vertical;
+}
+
+#setting-list-table tr:nth-child(even){
+    background:#f2f2f2;
+}
+
+#setting-info-name div {
+    word-break: break-all;
+}
+
+th.column_name_col{
+    width: 20%;
+}
+
+th.update_detail_col{
+    width: 70%;
+}

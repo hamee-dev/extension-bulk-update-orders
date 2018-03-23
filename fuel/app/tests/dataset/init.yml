@@ -1,0 +1,33 @@
+companies:
+  -
+    id: '##DUMMY_COMPANY_ID1##'
+    main_function_id: 'dummy_main_function_id'
+    company_ne_id: 'dummy_company_ne_id'
+    name: 'ダミー企業'
+    name_kana: 'だみーきぎょう'
+    stoped_at:
+users:
+  -
+    id: '##DUMMY_USER_ID1##'
+    company_id: '##DUMMY_COMPANY_ID1##'
+    uid: 'dummy_uid'
+    pic_id: 2
+    pic_ne_id: 'dummy_pic_ne_id'
+    pic_name: 'ダミーユーザー'
+    pic_kana: 'だみーゆーざー'
+    access_token: 'dummy_access_token'
+    access_token_end_date: '2018-04-27 11:21:00'
+    refresh_token: 'dummy_refresh_token'
+    refresh_token_end_date: '018-04-29 11:21:00'
+  -
+    id: '##DUMMY_USER_ID2##'
+    company_id: '##DUMMY_COMPANY_ID1##'
+    uid: 'dummy_uid2'
+    pic_id: 2
+    pic_ne_id: 'dummy_pic_ne_id2'
+    pic_name: 'ダミーユーザー2'
+    pic_kana: 'だみーゆーざー2'
+    access_token: 'dummy_access_token2'
+    access_token_end_date: '2018-04-27 11:21:00'
+    refresh_token: 'dummy_refresh_token2'
+    refresh_token_end_date: '018-04-29 11:21:00'

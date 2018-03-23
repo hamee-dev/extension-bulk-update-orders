@@ -1,0 +1,10 @@
+excluded_receive_orders:
+  -
+    execution_bulk_update_setting_id: '##DUMMY_EXECUTION_BULK_UPDATE_SETTING_ID1##'
+    receive_order_id: 1
+  -
+    execution_bulk_update_setting_id: '##DUMMY_EXECUTION_BULK_UPDATE_SETTING_ID1##'
+    receive_order_id: 11
+  -
+    execution_bulk_update_setting_id: '##DUMMY_EXECUTION_BULK_UPDATE_SETTING_ID2##'
+    receive_order_id: 2

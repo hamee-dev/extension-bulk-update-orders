@@ -1,0 +1,49 @@
+execution_bulk_update_settings:
+  -
+    id: '##DUMMY_EXECUTION_BULK_UPDATE_SETTING_ID1##'
+    request_key: '20180427-1'
+    user_id: '##DUMMY_USER_ID1##'
+    extension_execution_id: '##DUMMY_EXTENSION_EXCUTION_ID1##'
+    target_order_count: 2
+    executed: 0
+    company_id: '##DUMMY_COMPANY_ID1##'
+    name: 'テスト実行1'
+  -
+    id: '##DUMMY_EXECUTION_BULK_UPDATE_SETTING_ID2##'
+    request_key: '20180427-2'
+    user_id: '##DUMMY_USER_ID1##'
+    extension_execution_id: '##DUMMY_EXTENSION_EXCUTION_ID2##'
+    target_order_count: 1
+    executed: 0
+    company_id: '##DUMMY_COMPANY_ID1##'
+    name: 'テスト実行2'
+  -
+    id: '##DUMMY_EXECUTION_BULK_UPDATE_SETTING_ID4##'
+    request_key: '20180427-4'
+    user_id: '##DUMMY_USER_ID1##'
+    extension_execution_id: '##DUMMY_EXTENSION_EXCUTION_ID4##'
+    target_order_count: 1
+    executed: 0
+    company_id: '##DUMMY_COMPANY_ID1##'
+    name: 'テスト実行4'
+execution_bulk_update_columns:
+  -
+    execution_bulk_update_setting_id: '##DUMMY_EXECUTION_BULK_UPDATE_SETTING_ID1##'
+    receive_order_column_id: 1
+    update_method_id: 1
+    update_value: '適当な値'
+  -
+    execution_bulk_update_setting_id: '##DUMMY_EXECUTION_BULK_UPDATE_SETTING_ID1##'
+    receive_order_column_id: 2
+    update_method_id: 1
+    update_value: '適当な値'
+  -
+    execution_bulk_update_setting_id: '##DUMMY_EXECUTION_BULK_UPDATE_SETTING_ID2##'
+    receive_order_column_id: 1
+    update_method_id: 1
+    update_value: '適当な値'
+  -
+    execution_bulk_update_setting_id: '##DUMMY_EXECUTION_BULK_UPDATE_SETTING_ID4##'
+    receive_order_column_id: 6
+    update_method_id: 1
+    update_value: '[tag]'

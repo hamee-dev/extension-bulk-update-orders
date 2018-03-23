@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- fuel/core/phpunit.xmlをfuel/appにコピーし上書きしたもの -->
+<phpunit colors="true" stopOnFailure="false" bootstrap="../app/bootstrap_phpunit.php">
+    <php>
+        <server name="doc_root" value="../../"/>
+        <server name="app_path" value="fuel/app"/>
+        <server name="core_path" value="fuel/core"/>
+        <server name="package_path" value="fuel/packages"/>
+        <server name="vendor_path" value="fuel/vendor"/>
+        <server name="FUEL_ENV" value="test"/>
+    </php>
+    <testsuites>
+        <!-- coreのテストは不要なので除去 -->
+        <testsuite name="packages">
+            <directory suffix=".php">../packages/*/tests</directory>
+        </testsuite>
+        <testsuite name="app">
+            <directory suffix=".php">../app/tests</directory>
+        </testsuite>
+        <testsuite name="modules">
+            <directory suffix=".php">../app/modules/*/tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

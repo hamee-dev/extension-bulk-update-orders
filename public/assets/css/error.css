@@ -1,0 +1,15 @@
+/* エラー画面用スタイル */
+#error-content {
+    width: 100%;
+    text-align: center;
+}
+
+#error-title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#error-description {
+    color: #6f6f6f;
+}

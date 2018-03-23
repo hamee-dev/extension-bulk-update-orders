@@ -1,0 +1,21 @@
+companies:
+  -
+    id: '##DUMMY_COMPANY_ID1##'
+    main_function_id: 'dummy_main_function_id'
+    company_ne_id: 'dummy_company_ne_id'
+    name: 'ダミー企業'
+    name_kana: 'だみーきぎょう'
+    stoped_at:
+  -
+    id: '##DUMMY_COMPANY_ID2##'
+    main_function_id: 'dummy_main_function_id2'
+    company_ne_id: 'dummy_company_ne_id2'
+    name: 'ダミー企業2'
+    name_kana: 'だみーきぎょう2'
+    stoped_at:
+request_keys:
+  -
+    id: 1
+    company_id: '##DUMMY_COMPANY_ID1##'
+    request_date: '2018-05-01'
+    request_number : 1
