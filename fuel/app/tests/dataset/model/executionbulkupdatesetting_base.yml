@@ -26,6 +26,15 @@ execution_bulk_update_settings:
     executed: 0
     company_id: '##DUMMY_COMPANY_ID1##'
     name: 'テスト実行4'
+  -
+    id: '##DUMMY_EXECUTION_BULK_UPDATE_SETTING_ID5##'
+    request_key: '20180427-5'
+    user_id: '##DUMMY_USER_ID1##'
+    extension_execution_id: '##DUMMY_EXTENSION_EXCUTION_ID5##'
+    target_order_count: 1
+    executed: 0
+    company_id: '##DUMMY_COMPANY_ID1##'
+    name: 'テスト実行5'
 execution_bulk_update_columns:
   -
     execution_bulk_update_setting_id: '##DUMMY_EXECUTION_BULK_UPDATE_SETTING_ID1##'
@@ -47,3 +56,23 @@ execution_bulk_update_columns:
     receive_order_column_id: 6
     update_method_id: 1
     update_value: '[tag]'
+  -
+    execution_bulk_update_setting_id: '##DUMMY_EXECUTION_BULK_UPDATE_SETTING_ID5##'
+    receive_order_column_id: 3
+    update_method_id: 1
+    update_value: '2018/08/20'
+  -
+    execution_bulk_update_setting_id: '##DUMMY_EXECUTION_BULK_UPDATE_SETTING_ID5##'
+    receive_order_column_id: 19
+    update_method_id: 1
+    update_value: 'today'
+  -
+    execution_bulk_update_setting_id: '##DUMMY_EXECUTION_BULK_UPDATE_SETTING_ID5##'
+    receive_order_column_id: 21
+    update_method_id: 1
+    update_value: 'tomorrow'
+  -
+    execution_bulk_update_setting_id: '##DUMMY_EXECUTION_BULK_UPDATE_SETTING_ID5##'
+    receive_order_column_id: 25
+    update_method_id: 1
+    update_value: '+2 day'

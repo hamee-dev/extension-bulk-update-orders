@@ -32,6 +32,29 @@ class Domain_Model_Updatesetting{
     // NOTE: 暫定値なので都度調整して良い
     const MEMORY_LIMIT = '512M';
 
+
+    /**
+     * XMLの無効な文字(エラーとなってしまう文字)
+     *
+     * @see http://d.hatena.ne.jp/letitride/20120319/1332149944
+     * @see http://hakopako03.hatenablog.com/entry/2014/01/12/070144
+     */
+    private static $_xml_disabled_chars = [
+        "\0",   // NUL：NULl（ヌル）
+        "\x01", // SOH：Start Of Heading（ヘッダ開始）
+        "\x02", // STX：Start of TeXt（テキスト開始）
+        "\x03", // ETX：End of TeXt（テキスト終了）
+        "\x04", // EOT：End Of Transmission（転送終了）
+        "\x05", // ENQ：ENQuiry（問合せ）
+        "\x06", // ACK：ACKnowledge（肯定応答）
+        "\x07", // BEL：BELl（ベル）
+        "\x08", // BS：Back Space（後退）
+        "\x0b", // VT：Vertical Tabulation（垂直タブ）
+        "\x0c", // FF：Form Feed（改ページ）
+        "\x0e", // SO：Shift Out（シフトアウト）
+        "\x0f", // SI：Shift In（シフトイン）
+    ];
+
     /**
      * 特定のcodeの場合にメッセージを定義した別のメッセージに変更する
      *
@@ -1058,6 +1081,11 @@ class Domain_Model_Updatesetting{
                 }
             }
 
+            if ($update_column->receive_order_column->column_type->is_date()) {
+                // 日付型の場合、再度日付フォーマットに整形し直す（$update_valueがtoday,tomorrow,+2dayの場合があるため）
+                $update_value = date('Y/m/d', strtotime($update_value));
+            }
+
             // 更新設定を適用させる
             $evaluated_value = Model_Updatemethod::evaluate($update_method_id, $ne_value, $update_value);
 
@@ -1807,15 +1835,26 @@ class Domain_Model_Updatesetting{
             // @see http://weble.org/2011/06/19/xml-escape
             foreach($receive_order as $key => $value){
                 if(in_array($key, $base_update_fields, true)){
-                    $receiveorder_base_node->addChild($key, htmlspecialchars($value));
+                    $receiveorder_base_node->addChild($key, htmlspecialchars(self::_remove_disabled_chars($value)));
                 }
 
                 if(in_array($key, $option_update_fields, true)){
-                    $receiveorder_option_node->addChild($key, htmlspecialchars($value));
+                    $receiveorder_option_node->addChild($key, htmlspecialchars(self::_remove_disabled_chars($value)));
                 }
             }
         }
         $xml = $root_node->asXML();
         return $xml;
+    }
+
+    /**
+     * XMLの無効な文字(エラーとなってしまう文字)を除去する
+     *
+     * @param string $str 変換対象文字列
+     * @return string
+     */
+    private static function _remove_disabled_chars(string $str) : string
+    {
+        return str_replace(self::$_xml_disabled_chars, '', $str);
     }
 }

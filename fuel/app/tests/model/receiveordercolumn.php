@@ -183,4 +183,45 @@ class Test_Model_Receiveordercolumn extends Testbase {
         $receive_order_column->id = $receive_order_column_id;
         $this->assertEquals($expected, $receive_order_column->is_seal());
     }
+
+    public function test_get_date_select_types_日付の入力方法のリストが取得できること() {
+        $expect = [
+            Model_Receiveordercolumn::DATE_SELECT_TYPE_INPUT => '日付を入力',
+            Model_Receiveordercolumn::DATE_SELECT_TYPE_TODAY => '今日',
+            Model_Receiveordercolumn::DATE_SELECT_TYPE_TOMORROW => '明日',
+            Model_Receiveordercolumn::DATE_SELECT_TYPE_PLUS_TWO_DAYS => '明後日'
+        ];
+        $result = Model_Receiveordercolumn::get_date_select_types();
+        $this->assertEquals($expect, $result);
+    }
+
+    public function test_get_relative_date_list_相対的な日付指定のリストが取得できること() {
+        $expect = [
+            Model_Receiveordercolumn::DATE_SELECT_TYPE_TODAY => '今日',
+            Model_Receiveordercolumn::DATE_SELECT_TYPE_TOMORROW => '明日',
+            Model_Receiveordercolumn::DATE_SELECT_TYPE_PLUS_TWO_DAYS => '明後日'
+        ];
+        $result = Model_Receiveordercolumn::get_relative_date_list();
+        $this->assertEquals($expect, $result);
+    }
+
+    public function test_is_date_select_relative_date_引数の値が相対的な日付指定の値の場合trueを返すこと() {
+        $result = Model_Receiveordercolumn::is_date_select_relative_date('today');
+        $this->assertTrue($result);
+
+        $result = Model_Receiveordercolumn::is_date_select_relative_date('tomorrow');
+        $this->assertTrue($result);
+
+        $result = Model_Receiveordercolumn::is_date_select_relative_date('+2 day');
+        $this->assertTrue($result);
+    }
+
+    public function test_is_date_select_relative_date_引数の値が相対的な日付指定の値ではない場合falseを返すこと() {
+        $result = Model_Receiveordercolumn::is_date_select_relative_date('2018/08/28');
+        $this->assertFalse($result);
+
+        $result = Model_Receiveordercolumn::is_date_select_relative_date('TEST');
+        $this->assertFalse($result);
+    }
+
 }

@@ -22,7 +22,12 @@
     // 発送関連情報のタイプ情報の連想配列
     EXT_BUO.UPDATESETTING.forwarding_agent_types = <?= json_encode($js_forwarding_agent_types) ?>;
     // 設定名の最大入力文字数
-    EXT_BUO.UPDATESETTING.setting_name_max_length = <?= Domain_Validator_Updatesetting::SETTING_NAME_MAX_LENGTH ?>
+    EXT_BUO.UPDATESETTING.setting_name_max_length = <?= Domain_Validator_Updatesetting::SETTING_NAME_MAX_LENGTH ?>;
+
+    // 直接入力する日付の入力方法
+    EXT_BUO.UPDATESETTING.date_select_type_input = '<?= Model_Receiveordercolumn::DATE_SELECT_TYPE_INPUT ?>';
+    // 相対的な日付の入力方法の配列(「今日」「明日」「明後日」)
+    EXT_BUO.UPDATESETTING.date_select_type_relative_list = <?= json_encode(Model_Receiveordercolumn::get_relative_date_list()) ?>;
 
 </script>
 <?= Form::hidden('no-select-value', __p('no_select_value'), ['id' => 'no-select-value']);?>

@@ -73,6 +73,9 @@ $(function(){
             }else if ($(element).find('.tag-list').length === 1) {
                 // タグ型の場合
                 create_tag_element(element);
+            }else if ($(element).find('.calendar-select').length === 1) {
+                // 日付型の場合
+                select_date_method(element.find('.date-input'));
             }
         }
 
@@ -134,8 +137,13 @@ $(function(){
      * @param string column_id 変更するカラムID
      */
     function add_column_id(element, column_id) {
-        if (element && element.attr('name')) {
-            element.attr('name', element.attr('name').replace('[]', '['+column_id+']'));
+        if (element) {
+            if (element.attr('name')) {
+                element.attr('name', element.attr('name').replace('[]', '['+column_id+']'));
+            }
+            if (element.attr('id')) {
+                element.attr('id', element.attr('id').replace('[]', '['+column_id+']'));
+            }
         }
     }
 
@@ -332,7 +340,11 @@ $(function(){
             format: "yyyy/mm/dd",
             language: "ja"
         });
-        $(this).datepicker("show").datepicker('setDate', 'today');
+        $(this).datepicker("show");
+        if ($(this).val() === '') {
+            // 未入力であれば今日を選択する
+            $(this).datepicker('setDate', 'today');
+        }
     });
 
     /**
@@ -705,4 +717,39 @@ $(function(){
             }
         }
     });
+
+    /**
+     * 日付の入力方法のセレクトボックスの変更イベント
+     */
+    $(document).on('change', 'select.date-select', function () {
+        select_date_method($(this).parents('.setting-list-data').find('.date-input'), $(this).val());
+    })
+
+    /**
+     * 日付の項目の表示を更新する
+     * 「日付を入力」を選択した場合、テキストボックスを表示し
+     * 「今日」「明日」「明後日」を選択した場合は、テキストボックスを非表示にする
+     *
+     * @param element 日付の項目の更新内容の要素
+     * @param select_value 日付の入力方法のセレクトボックスの値
+     */
+    function select_date_method(element, select_value) {
+
+        if (!select_value) {
+            // select_valueが無い場合は「日付を入力」にする
+            select_value = EXT_BUO.UPDATESETTING.date_select_type_input;
+        }
+
+        if (select_value === EXT_BUO.UPDATESETTING.date_select_type_input) {
+            // 「日付を入力」の場合
+            element.show();
+            element.addClass('.calendar-select');
+            element.val('');
+        }else if (select_value in EXT_BUO.UPDATESETTING.date_select_type_relative_list) {
+            // 「今日」「明日」「明後日」の場合
+            element.hide();
+            element.removeClass('.calendar-select');
+            element.val(select_value);
+        }
+    }
 });
