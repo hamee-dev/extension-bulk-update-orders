@@ -1336,6 +1336,40 @@ class Test_Domain_Model_Updatesetting extends Testbase
         $this->assertEquals($expect, $domain_value_convertresult);
     }
 
+    public function test_convert_日付型が正しく変換された結果のDomain_Value_Convertresultオブジェクトを返すこと(){
+        $execution_bulk_update_setting = Model_Executionbulkupdatesetting::find(self::DUMMY_EXECUTION_BULK_UPDATE_SETTING_ID5);
+        $receive_orders = [
+            ['receive_order_id' => '1', 'receive_order_shop_id' => '1', 'receive_order_gruoping_tag' => '[dummy_tag]', 'receive_order_order_status_id' => '10', 'receive_order_last_modified_date' => '2018-05-11 13:06:00', 'receive_order_date' => '2018-08-25 00:00:00', 'receive_order_deposit_date' => '2018-08-26 00:00:00', 'receive_order_statement_delivery_instruct_printing_date' => '2018-08-27 00:00:00', 'receive_order_hope_delivery_date' => '2018-08-30 00:00:00'],
+            ['receive_order_id' => '2', 'receive_order_shop_id' => '1', 'receive_order_gruoping_tag' => '[dummy_tag]', 'receive_order_order_status_id' => '10', 'receive_order_last_modified_date' => '2018-05-11 13:06:00', 'receive_order_date' => '2018-08-25 00:00:00', 'receive_order_deposit_date' => '2018-08-26 00:00:00', 'receive_order_statement_delivery_instruct_printing_date' => '2018-08-27 00:00:00', 'receive_order_hope_delivery_date' => '2018-08-30 00:00:00'],
+        ];
+        $domain_model_updatesetting = new Domain_Model_Updatesetting();
+        $domain_value_convertresult = $domain_model_updatesetting->convert($execution_bulk_update_setting, $receive_orders);
+
+        $update_target_orders = [
+            '1' => [
+                'receive_order_gruoping_tag'       => '[dummy_tag][【済】テスト実行5]',
+                'receive_order_date'               => '2018/08/20',
+                'receive_order_deposit_date'       => date('Y/m/d', strtotime('today')),
+                'receive_order_statement_delivery_instruct_printing_date' => date('Y/m/d', strtotime('tomorrow')),
+                'receive_order_hope_delivery_date' => date('Y/m/d', strtotime('+2 day')),
+                'receive_order_id'                 => '1',
+                'receive_order_last_modified_date' => '2018-05-11 13:06:00',
+            ],
+            '2' => [
+                'receive_order_gruoping_tag'       => '[dummy_tag][【済】テスト実行5]',
+                'receive_order_date'               => '2018/08/20',
+                'receive_order_deposit_date'       => date('Y/m/d', strtotime('today')),
+                'receive_order_statement_delivery_instruct_printing_date' => date('Y/m/d', strtotime('tomorrow')),
+                'receive_order_hope_delivery_date' => date('Y/m/d', strtotime('+2 day')),
+                'receive_order_id'                 => '2',
+                'receive_order_last_modified_date' => '2018-05-11 13:06:00',
+            ],
+        ];
+        $excluded_id_and_reason = [];
+        $expect = new Domain_Value_Convertresult($update_target_orders, $excluded_id_and_reason);
+        $this->assertEquals($expect, $domain_value_convertresult);
+    }
+
     public function test_convert_引数の受注伝票情報が存在しない場合に更新対象が空のDomain_Value_Convertresultオブジェクトを返すこと(){
         $execution_bulk_update_setting = Model_Executionbulkupdatesetting::find(self::DUMMY_EXECUTION_BULK_UPDATE_SETTING_ID1);
         $receive_orders = [];

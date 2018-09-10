@@ -18,7 +18,7 @@ zero_division: ':label に対して0で除算する設定はできません。�
 tag_format: ':label は「[ ]」で囲まれたタグ形式で入力してください。'
 tag_length: ':label の1つのタグ名は:param:1文字以下で入力して下さい。'
 tag_match_pattern: ":label のタグ名に「'」「\"」「 < 」「[」「]」を使用することはできません。"
-valid_date: ':label は「西暦/月/日」の形式で入力してください。'
+valid_date: ':label は「西暦/月/日」の形式で入力するか、:param:1 から選択してください。'
 setting_name: ':label が重複しています。別の名前をつけてください。'
 setting_count: ':label が設定(保存)可能数:param:1件を超えています。登録済みの設定を削除して再度お試しください。保存せずに実行する場合は「実行」ボタンを押してください。'
 setting_column_count: ':label が登録上限を超えています。登録数を減らして再度お試しください。'

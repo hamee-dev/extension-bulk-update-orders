@@ -21,6 +21,12 @@ class Model_Receiveordercolumn extends Model_Base
     const COLUMN_ID_SEAL_3        = '33'; // シール3
     const COLUMN_ID_SEAL_4        = '34'; // シール4
 
+    // 日付の入力方法
+    const DATE_SELECT_TYPE_INPUT       = 'input'; // 直接日付入力
+    const DATE_SELECT_TYPE_TODAY       = 'today'; // 今日
+    const DATE_SELECT_TYPE_TOMORROW    = 'tomorrow'; // 明日
+    const DATE_SELECT_TYPE_PLUS_TWO_DAYS   = '+2 day'; // 明後日
+
     protected static $_table_name = 'receive_order_columns';
 
     protected static $_properties = [
@@ -89,6 +95,44 @@ class Model_Receiveordercolumn extends Model_Base
             'receive_order_order_status_id' => '受注状態区分',
             'receive_order_confirm_ids' => '受注確認内容',
         ];
+    }
+
+    /**
+     * 日付の入力方法を取得する
+     *
+     * @return array
+     */
+    public static function get_date_select_types() : array {
+        $date_list = [self::DATE_SELECT_TYPE_INPUT => '日付を入力'];
+        return array_merge($date_list, self::get_relative_date_list());
+    }
+
+    /**
+     * 相対的な日付指定のリスト
+     * 「今日」「明日」「明後日」
+     *
+     * @return array
+     */
+    public static function get_relative_date_list() : array {
+        return [
+            self::DATE_SELECT_TYPE_TODAY => '今日',
+            self::DATE_SELECT_TYPE_TOMORROW => '明日',
+            self::DATE_SELECT_TYPE_PLUS_TWO_DAYS => '明後日'
+        ];
+    }
+
+    /**
+     * 更新する値が今日、明日、明後日のどれかか
+     *
+     * @param string 更新する値(bulk_update_columns.update_value)
+     * @return bool
+     */
+    public static function is_date_select_relative_date(string $value) : bool {
+        $relative_date_list = self::get_relative_date_list();
+        if (isset($relative_date_list[$value])) {
+            return true;
+        }
+        return false;
     }
 
     /**

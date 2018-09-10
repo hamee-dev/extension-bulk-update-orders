@@ -423,6 +423,25 @@ class Utility_Masterdataprovider
         $data->api_response = [];
         $data_provider[] = [$data, 1, null, []];
 
+        // forwarding_agent_type_idもしくはforwarding_agent_type_nameがnullだった場合
+        $api_response = [
+            ["forwarding_agent_id" => "1", "forwarding_agent_type" => "binsyu_kbn", "forwarding_agent_type_id" => "1", "forwarding_agent_type_name" => "name1", "forwarding_agent_display_order" => "5", "forwarding_agent_deleted_flag" => "0"],
+            ["forwarding_agent_id" => "1", "forwarding_agent_type" => "binsyu_kbn", "forwarding_agent_type_id" => "2", "forwarding_agent_type_name" => null, "forwarding_agent_display_order" => "1", "forwarding_agent_deleted_flag" => "0"],
+            ["forwarding_agent_id" => "1", "forwarding_agent_type" => "binsyu_kbn", "forwarding_agent_type_id" => null, "forwarding_agent_type_name" => "name3", "forwarding_agent_display_order" => "3", "forwarding_agent_deleted_flag" => "0"],
+            ["forwarding_agent_id" => "1", "forwarding_agent_type" => "eigyosyo_dome_kbn", "forwarding_agent_type_id" => "4", "forwarding_agent_type_name" => "name4", "forwarding_agent_display_order" => "2", "forwarding_agent_deleted_flag" => "0"],
+            ["forwarding_agent_id" => "2", "forwarding_agent_type" => "binsyu_kbn", "forwarding_agent_type_id" => "5", "forwarding_agent_type_name" => "name5", "forwarding_agent_display_order" => "4", "forwarding_agent_deleted_flag" => "0"],
+        ];
+        $result = [
+            self::get_forwarding_agent_unique_key($api_response[0]) => new Domain_Value_Master('1', 'name1', false, ["forwarding_agent_id" => "1", "forwarding_agent_type" => "binsyu_kbn", "forwarding_agent_display_order" => "5", "forwarding_agent_deleted_flag" => "0"]),
+            self::get_forwarding_agent_unique_key($api_response[3]) => new Domain_Value_Master('4', 'name4', false, ["forwarding_agent_id" => "1", "forwarding_agent_type" => "eigyosyo_dome_kbn", "forwarding_agent_display_order" => "2", "forwarding_agent_deleted_flag" => "0"]),
+        ];
+        $data = $this->_create_provider_object();
+        $data->name = Utility_Master::MASTER_NAME_FORWARDINGAGENT;
+        $data->path = Client_Neapi::PATH_RECEIVEORDER_FORWARDINGAGENT_SEARCH;
+        $data->fields = 'forwarding_agent_id,forwarding_agent_type,forwarding_agent_type_id,forwarding_agent_type_name,forwarding_agent_display_order,forwarding_agent_deleted_flag';
+        $data->api_response = $api_response;
+        $data_provider[] = [$data, 1, null, $result];
+
         return $data_provider;
     }
 }

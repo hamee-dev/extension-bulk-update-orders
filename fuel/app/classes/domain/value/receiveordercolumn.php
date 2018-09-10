@@ -123,6 +123,10 @@ class Domain_Value_Receiveordercolumn
             if (strtotime($original_value) === false || $original_value === '0000-00-00 00:00:00') {
                 // 空文字など変換できない場合には空文字にする
                 $value = '';
+            } else if (!$is_order_value && Model_Receiveordercolumn::is_date_select_relative_date($original_value)) {
+                // 「今日」「明日」「明後日」の場合、日付表示ではなくアイコン表示にする
+                $date_select_types = Model_Receiveordercolumn::get_relative_date_list();
+                $value = '<div class="setting-detail-icon blue-area">' . $date_select_types[$original_value] . '</div>';
             } else {
                 $value = date('Y/m/d', strtotime($original_value));
             }

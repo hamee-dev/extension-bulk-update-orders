@@ -36,6 +36,9 @@ class Domain_Value_Receiveordercolumndataprovider{
             ['update_value' => '20180615 000000',     'expect' => '2018/06/15'],
             ['update_value' => '20180615',            'expect' => '2018/06/15'],
             ['update_value' => '2016/02/29 00:00:00', 'expect' => '2016/02/29'],
+            ['update_value' => 'today', 'expect' => '<div class="setting-detail-icon blue-area">今日</div>'],
+            ['update_value' => 'tomorrow', 'expect' => '<div class="setting-detail-icon blue-area">明日</div>'],
+            ['update_value' => '+2 day', 'expect' => '<div class="setting-detail-icon blue-area">明後日</div>'],
 
             // 異常系
             ['update_value' => '',       'expect' => \Lang::get('common.empty_update_dom')],
