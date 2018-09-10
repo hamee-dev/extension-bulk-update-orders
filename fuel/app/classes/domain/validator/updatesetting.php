@@ -758,8 +758,15 @@ class Domain_Validator_Updatesetting
         // 更新値が空文字を許可しているのでその場合はバリデーション不要
         // ただし受注日は空更新を許可していないので受注日は必須バリデーションとする
         if ($update_value !== '' || $receive_order_column->is_order_date()) {
-            $fieldset_field->add_rule('required')
-                ->add_rule('valid_date', 'Y/m/d');
+            $fieldset_field->add_rule('required');
+            $fieldset_field->add_rule(['valid_date' => function() use ($update_value) {
+                $validation = \Validation::instance();
+                if (Model_Receiveordercolumn::is_date_select_relative_date($update_value) || //「today」「tomorrow」「+2 day」のどれかだった場合
+                    $validation->_validation_valid_date($update_value, 'Y/m/d')) { // Y/m/dのフォーマットの日付だった場合
+                    return true;
+                }
+                return false;
+            }], implode(', ', array_values(Model_Receiveordercolumn::get_relative_date_list())));
         }
     }
 

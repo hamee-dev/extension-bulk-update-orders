@@ -327,6 +327,46 @@ class Test_Utility_Master extends Testbase
         $this->assertEquals($result, $method->invoke(new Utility_Master(self::DUMMY_COMPANY_ID1, self::DUMMY_USER_ID1), $list, $is_key, $name_key, $enabled, $disabled_flags));
     }
 
+    public function test_get_data_formating_id_keyもしくはname_keyがnullだった場合そのデータは無視されること() {
+        $list = [
+            ['shop_id' => '1', 'shop_name' => null, 'shop_deleted_flag' => '0'],
+            ['shop_id' => '2', 'shop_name' => 'name2', 'shop_deleted_flag' => '1'],
+            ['shop_id' => '3', 'shop_name' => 'name3', 'shop_deleted_flag' => '0'],
+            ['shop_id' => null, 'shop_name' => 'name4', 'shop_deleted_flag' => '0'],
+        ];
+        $is_key = 'shop_id';
+        $name_key = 'shop_name';
+        $enabled = true;
+        $disabled_flags = ['shop_deleted_flag' => '1'];
+        $result = [
+            '3' => new Domain_Value_Master('3', 'name3', false, ['shop_deleted_flag' => '0']),
+        ];
+
+        $method = $this->getMethod(Utility_Master::class, 'get_data_formating');
+        $this->assertEquals($result, $method->invoke(new Utility_Master(self::DUMMY_COMPANY_ID1, self::DUMMY_USER_ID1), $list, $is_key, $name_key, $enabled, $disabled_flags));
+    }
+
+    public function test_get_data_formating_id_keyもしくはname_key以外がnullだった場合そのデータは無視されないこと() {
+        $list = [
+            ['shop_id' => '1', 'shop_name' => 'name1', 'dummy' => null, 'shop_deleted_flag' => '0'],
+            ['shop_id' => '2', 'shop_name' => 'name2', 'dummy' => null, 'shop_deleted_flag' => '1'],
+            ['shop_id' => '3', 'shop_name' => 'name3', 'dummy' => null, 'shop_deleted_flag' => '0'],
+            ['shop_id' => '4', 'shop_name' => 'name4', 'dummy' => null, 'shop_deleted_flag' => '0'],
+        ];
+        $is_key = 'shop_id';
+        $name_key = 'shop_name';
+        $enabled = true;
+        $disabled_flags = ['shop_deleted_flag' => '1'];
+        $result = [
+            '1' => new Domain_Value_Master('1', 'name1', false, ['dummy' => null, 'shop_deleted_flag' => '0']),
+            '3' => new Domain_Value_Master('3', 'name3', false, ['dummy' => null, 'shop_deleted_flag' => '0']),
+            '4' => new Domain_Value_Master('4', 'name4', false, ['dummy' => null, 'shop_deleted_flag' => '0']),
+        ];
+
+        $method = $this->getMethod(Utility_Master::class, 'get_data_formating');
+        $this->assertEquals($result, $method->invoke(new Utility_Master(self::DUMMY_COMPANY_ID1, self::DUMMY_USER_ID1), $list, $is_key, $name_key, $enabled, $disabled_flags));
+    }
+
     public function test_get_キャッシュがある場合キャッシュを取得すること() {
         $stub = $this->getMockBuilder(Utility_Master::class)
             ->setConstructorArgs([self::DUMMY_USER_ID1])

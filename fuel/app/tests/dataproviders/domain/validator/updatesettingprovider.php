@@ -1254,14 +1254,42 @@ class Domain_Validator_Updatesettingprovider
     {
         return [
             [
-                // 日付型の正常系
+                // Y/m/dのフォーマットの日付の場合バリデーションエラーにならないこと
                 'post_params' => self::_get_post_params('TEST4', '', [Model_Receiveordercolumn::COLUMN_ID_ORDER_DATE], [], [Model_Receiveordercolumn::COLUMN_ID_ORDER_DATE => Model_Updatemethod::OVERWRITE], [Model_Receiveordercolumn::COLUMN_ID_ORDER_DATE => '2018/06/01']),
                 'company_id' => Test_Domain_Validator_Updatesetting::DUMMY_COMPANY_ID1,
                 'type' => Domain_Validator_Updatesetting::VALID_TYPE_SAVE,
                 'valid_result' => true,
             ],
             [
-                // 日付以外の場合バリデーションエラーになること
+                // Y/m/dのフォーマット以外の日付の場合バリデーションエラーになること
+                'post_params' => self::_get_post_params('TEST4', '', [Model_Receiveordercolumn::COLUMN_ID_ORDER_DATE], [], [Model_Receiveordercolumn::COLUMN_ID_ORDER_DATE => Model_Updatemethod::OVERWRITE], [Model_Receiveordercolumn::COLUMN_ID_ORDER_DATE => '2018-06-01']),
+                'company_id' => Test_Domain_Validator_Updatesetting::DUMMY_COMPANY_ID1,
+                'type' => Domain_Validator_Updatesetting::VALID_TYPE_SAVE,
+                'valid_result' => false,
+            ],
+            [
+                // 「today」の場合バリデーションエラーにならないこと
+                'post_params' => self::_get_post_params('TEST4', '', [Model_Receiveordercolumn::COLUMN_ID_ORDER_DATE], [], [Model_Receiveordercolumn::COLUMN_ID_ORDER_DATE => Model_Updatemethod::OVERWRITE], [Model_Receiveordercolumn::COLUMN_ID_ORDER_DATE => 'today']),
+                'company_id' => Test_Domain_Validator_Updatesetting::DUMMY_COMPANY_ID1,
+                'type' => Domain_Validator_Updatesetting::VALID_TYPE_SAVE,
+                'valid_result' => true,
+            ],
+            [
+                // 「tomorrow」の場合バリデーションエラーにならないこと
+                'post_params' => self::_get_post_params('TEST4', '', [Model_Receiveordercolumn::COLUMN_ID_ORDER_DATE], [], [Model_Receiveordercolumn::COLUMN_ID_ORDER_DATE => Model_Updatemethod::OVERWRITE], [Model_Receiveordercolumn::COLUMN_ID_ORDER_DATE => 'tomorrow']),
+                'company_id' => Test_Domain_Validator_Updatesetting::DUMMY_COMPANY_ID1,
+                'type' => Domain_Validator_Updatesetting::VALID_TYPE_SAVE,
+                'valid_result' => true,
+            ],
+            [
+                // 「+2 day」の場合バリデーションエラーにならないこと
+                'post_params' => self::_get_post_params('TEST4', '', [Model_Receiveordercolumn::COLUMN_ID_ORDER_DATE], [], [Model_Receiveordercolumn::COLUMN_ID_ORDER_DATE => Model_Updatemethod::OVERWRITE], [Model_Receiveordercolumn::COLUMN_ID_ORDER_DATE => '+2 day']),
+                'company_id' => Test_Domain_Validator_Updatesetting::DUMMY_COMPANY_ID1,
+                'type' => Domain_Validator_Updatesetting::VALID_TYPE_SAVE,
+                'valid_result' => true,
+            ],
+            [
+                // 「Y/m/dのフォーマット以外の日付」「today」「tomorrow」「+2 day」以外の場合バリデーションエラーになること
                 'post_params' => self::_get_post_params('TEST4', '', [Model_Receiveordercolumn::COLUMN_ID_ORDER_DATE], [], [Model_Receiveordercolumn::COLUMN_ID_ORDER_DATE => Model_Updatemethod::OVERWRITE], [Model_Receiveordercolumn::COLUMN_ID_ORDER_DATE => 'hoge']),
                 'company_id' => Test_Domain_Validator_Updatesetting::DUMMY_COMPANY_ID1,
                 'type' => Domain_Validator_Updatesetting::VALID_TYPE_SAVE,

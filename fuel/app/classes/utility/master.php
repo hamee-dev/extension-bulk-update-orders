@@ -378,6 +378,11 @@ class Utility_Master
                 $delete_flag = true;
             }
 
+            if (is_null($data['forwarding_agent_type_id']) || is_null($data['forwarding_agent_type_name'])) {
+                // forwarding_agent_type_idもしくはforwarding_agent_type_nameがNULLの場合は無視する
+                continue;
+            }
+
             $id = $data['forwarding_agent_type_id'];
             $name = $data['forwarding_agent_type_name'];
             // データ量を減らすため不要なデータを削除
@@ -581,6 +586,11 @@ class Utility_Master
                     // 無効なデータだったため次の要素へ
                     continue;
                 }
+            }
+
+            if (is_null($data[$id_key]) || is_null($data[$name_key])) {
+                // マスタデータのidもしくはnameがNULLの場合は無視する
+                continue;
             }
 
             $id = $data[$id_key];
